@@ -114,6 +114,8 @@
 								code="master.page.company.position.list" /></a></li>
 					<li><a href="problem/company/list.do"><spring:message
 								code="master.page.company.problem.list" /></a></li>
+					<li><a href="quolet/company/list.do"><spring:message
+								code="master.page.company.quolet.list" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

@@ -566,6 +566,24 @@
 		<property name="position" ref="position1" />
 	</bean>	
 	
+	<bean id="audit6" class="domain.Audit">
+		<property name="moment" value="2018/10/21 13:02" />
+		<property name="text" value="Very high complexity" />
+		<property name="score" value="7.0" />
+		<property name="finalMode" value="false" />
+		<property name="auditor" ref="auditor1" />
+		<property name="position" ref="position3" />
+	</bean>	
+	
+	<bean id="audit7" class="domain.Audit">
+		<property name="moment" value="2018/10/21 13:02" />
+		<property name="text" value="Very high complexity" />
+		<property name="score" value="7.0" />
+		<property name="finalMode" value="false" />
+		<property name="auditor" ref="auditor1" />
+		<property name="position" ref="position3" />
+	</bean>	
+	
 	<!-- Item beans -->
 	
 	<bean id="item1" class="domain.Item">
@@ -681,7 +699,7 @@
 		<property name="requiredSkills" value="Comprehensive, Polite, B1 English level" />
 		<property name="requiredTech" value="Gantt project, Clockify, Trello" />
 		<property name="offeredSalary" value="10000.0" /> 
-		<property name="cancelled" value="true"/>
+		<property name="cancelled" value="false"/>
 		<property name="finalMode" value="true"/>
 		<property name="auditor"> <null /></property>
 		<property name="company" ref="company2" />
@@ -1082,4 +1100,45 @@
 		<property name="actor" ref="rookie2" />
 	</bean>
 	
+	<!-- Quolet beans -->
+	
+	<bean id="TESTquolet1" class="domain.Quolet">
+		<property name="ticker" value="112243-AADD" />
+		<property name="publicationMoment" value="2019/06/17 13:00" />
+		<property name="body" value="Hola buenas" />
+		<property name="picture"><null/></property>
+		<property name="finalMode" value="false" />
+		<property name="company" ref="company1"/>
+		<property name="audit" ref="audit1"/>
+	</bean>
+	
+	<bean id="TESTquolet2" class="domain.Quolet">
+		<property name="ticker" value="112113-AADD" />
+		<property name="publicationMoment" value="2019/05/15 13:00" />
+		<property name="body" value="Holasaffds buenas" />
+		<property name="picture"><null/></property>
+		<property name="finalMode" value="false" />
+		<property name="company" ref="company1"/>
+		<property name="audit" ref="audit1"/>
+	</bean>
+	
+	<bean id="TESTquolet3" class="domain.Quolet">
+		<property name="ticker" value="112633-AADD" />
+		<property name="publicationMoment" value="2019/02/20 13:00" />
+		<property name="body" value="Hola asddsabuenas" />
+		<property name="picture"><null/></property>
+		<property name="finalMode" value="true" />
+		<property name="company" ref="company2"/>
+		<property name="audit" ref="audit6"/>
+	</bean>
+	
+	<bean id="TESTquolet4" class="domain.Quolet">
+		<property name="ticker" value="112883-AAED" />
+		<property name="publicationMoment" value="2019/02/21 13:00" />
+		<property name="body" value="Hola buenas" />
+		<property name="picture"><null/></property>
+		<property name="finalMode" value="false" />
+		<property name="company" ref="company2"/>
+		<property name="audit" ref="audit7"/>
+	</bean>
 </beans>

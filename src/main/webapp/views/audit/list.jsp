@@ -31,6 +31,9 @@
 <spring:message code="audit.auditor" var="auditor" />
 <spring:message code="formatDate" var="formatDate" />
 
+<spring:message code="audit.createQ" var="createQ" />
+<spring:message code="audit.listQuolet" var="listQuolet" />
+
 <spring:message code="audit.create" var="create" />
 <spring:message code="audit.edit" var="edit" />
 <spring:message code="audit.save" var="save" />
@@ -63,14 +66,41 @@
 	
 	<display:column property="position.title" title="${position}" sortable="true" />
 	
-	<%-- Display --%>
-		<spring:url var="displayUrl" value="audit/display.do">
+	<%-- Quolet creation --%>
+	<security:authorize access="hasRole('COMPANY')">
+	<spring:url var="createUrl" value="quolet/company/create.do">
 			<spring:param name="varId" value="${row.id}" />
 		</spring:url>
+		<display:column title="${createQ}">
+			<a href="${createUrl}"><jstl:out value="${createQ}" /></a>
+		</display:column>
+	</security:authorize>
+	
+	<%-- Quolet creation --%>
+	<security:authorize access="hasRole('AUDITOR')">
+	<spring:url var="quoletListUrl" value="quolet/listByAudit.do">
+			<spring:param name="varId" value="${row.id}" />
+		</spring:url>
+		<display:column title="${listQuolet}">
+			<a href="${quoletListUrl}"><jstl:out value="${listQuolet}" /></a>
+		</display:column>
+	</security:authorize>
+	
+	<%-- Display --%>
+	<security:authorize access="hasRole('AUDITOR')">
+		<spring:url var="displayUrl" value="quolet/display.do">
+			<spring:param name="varId" value="${row.id}" />
+		</spring:url>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('COMPANY')">
+		<spring:url var="displayUrl" value="quolet/company/display.do">
+			<spring:param name="varId" value="${row.id}" />
+		</spring:url>
+	</security:authorize>
 		<display:column title="${display}">
 			<a href="${displayUrl}"><jstl:out value="${display}" /></a>
 		</display:column>
-		
 	<%-- Edit --%>	
 		<spring:url var="editUrl" value="audit/auditor/edit.do">
 			<spring:param name="varId" value="${row.id}" />

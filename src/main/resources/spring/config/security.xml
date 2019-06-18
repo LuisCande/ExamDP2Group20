@@ -45,6 +45,7 @@
 		<security:intercept-url pattern="/audit/**" access="permitAll" />
 		<security:intercept-url pattern="/item/**" access="permitAll" />
 		
+		
 		<security:intercept-url pattern="/curriculum/**" access="hasRole('ROOKIE')" />
 		<security:intercept-url pattern="/personalData/**" access="hasRole('ROOKIE')" />
 		<security:intercept-url pattern="/positionData/**" access="hasRole('ROOKIE')" />
@@ -65,6 +66,7 @@
 		<security:intercept-url pattern="/position/company/**" access="hasRole('COMPANY')" />
 		<security:intercept-url pattern="/problem/company/**" access="hasRole('COMPANY')" />
 		<security:intercept-url pattern="/application/company/**" access="hasRole('COMPANY')" />
+		<security:intercept-url pattern="/quolet/company/**" access="hasRole('COMPANY')" />
 		
 		<security:intercept-url pattern="/sponsorship/provider/**" access="hasRole('PROVIDER')" />
 		<security:intercept-url pattern="/item/provider/**" access="hasRole('PROVIDER')" />
@@ -72,6 +74,8 @@
 		<security:intercept-url pattern="/audit/auditor/**" access="hasRole('AUDITOR')" />
 		<security:intercept-url pattern="/position/auditor/**" access="hasRole('AUDITOR')" />
 		
+		<security:intercept-url pattern="/quolet/**" access="hasRole('AUDITOR')" />
+	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login
