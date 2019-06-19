@@ -44,9 +44,7 @@ public class QuoletServiceTest extends AbstractTest {
 			},
 		/*
 		 * Positive: A company tries to create a quolet.
-		 * Requisite tested: 3.2. An actor who is authenticated as an auditor must be able to:
-		 * Manage his or her audits, which includes listing them, showing them, creating them,
-		 * updating, and deleting them. An audit can be updated or deleted as long as it is saved in draft mode.
+		 * Requisite tested:
 		 * Data coverage : We created a quolet with 6 out of 6 valid parameters.
 		 * Exception expected: None. A company can create quolets.
 		 */
@@ -73,9 +71,7 @@ public class QuoletServiceTest extends AbstractTest {
 			},
 		/*
 		 * Negative: A rookie tries to create a quolet
-		 * Requisite tested: 3.2. An actor who is authenticated as an auditor must be able to:
-		 * Manage his or her audits, which includes listing them, showing them, creating them,
-		 * updating, and deleting them. An audit can be updated or deleted as long as it is saved in draft mode.
+		 * Requisite tested:
 		 * Data coverage : We tried to create a quolet with an invalid actor
 		 * Exception expected: ClassCastException a rookie can not create quolets.
 		 */
