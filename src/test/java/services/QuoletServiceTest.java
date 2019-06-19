@@ -37,18 +37,18 @@ public class QuoletServiceTest extends AbstractTest {
 	@Test
 	public void QuoletPositiveTest() {
 		final Object testingData[][] = {
-			//Total sentence coverage : Coverage 94.3% | Covered Instructions 100 | Missed Instructions 6 | Total Instructions 106
+			//Total sentence coverage : Coverage 91.7% | Covered Instructions 66 | Missed Instructions 6 | Total Instructions 72
 
 			{
 				"company1", null, "audit1", "create", null
 			},
 		/*
-		 * Positive: A auditor tries to create a audit.
+		 * Positive: A company tries to create a quolet.
 		 * Requisite tested: 3.2. An actor who is authenticated as an auditor must be able to:
 		 * Manage his or her audits, which includes listing them, showing them, creating them,
 		 * updating, and deleting them. An audit can be updated or deleted as long as it is saved in draft mode.
-		 * Data coverage : We created a audit with 5 out of 5 valid parameters.
-		 * Exception expected: None. An auditor can create audits.
+		 * Data coverage : We created a quolet with 6 out of 6 valid parameters.
+		 * Exception expected: None. A company can create quolets.
 		 */
 		};
 
@@ -66,17 +66,18 @@ public class QuoletServiceTest extends AbstractTest {
 	@Test
 	public void QuoletNegativeTest() {
 		final Object testingData[][] = {
-			//Total sentence coverage : Coverage 94.9% | Covered Instructions 112 | Missed Instructions 6 | Total Instructions 118
+			//Total sentence coverage : Coverage 92.1% | Covered Instructions 70 | Missed Instructions 6 | Total Instructions 76
 
 			{
 				"rookie1", null, "audit1", "createNegative", ClassCastException.class
 			},
 		/*
-		 * Negative: A auditor tries to create an audit with invalid data.
+		 * Negative: A rookie tries to create a quolet
 		 * Requisite tested: 3.2. An actor who is authenticated as an auditor must be able to:
 		 * Manage his or her audits, which includes listing them, showing them, creating them,
 		 * updating, and deleting them. An audit can be updated or deleted as long as it is saved in draft mode.
-		 * Data coverage : We created an audit with 4 out of 5 valid parametequolet * Exception expected: ConstraintViolationException. Moment must be past.
+		 * Data coverage : We tried to create a quolet with an invalid actor
+		 * Exception expected: ClassCastException a rookie can not create quolets.
 		 */
 		};
 
