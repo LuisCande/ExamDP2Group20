@@ -49,6 +49,24 @@ public class QuoletCompanyController extends AbstractController {
 		return result;
 	}
 
+	//Display
+
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int varId) {
+		final ModelAndView result;
+
+		final Quolet quolet = this.quoletService.findOne(varId);
+
+		if (quolet == null)
+			return new ModelAndView("redirect:/welcome/index.do");
+
+		result = new ModelAndView("quolet/display");
+		result.addObject("quolet", quolet);
+		result.addObject("requestURI", "quolet/company/display.do");
+
+		return result;
+	}
+
 	//Creation
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
