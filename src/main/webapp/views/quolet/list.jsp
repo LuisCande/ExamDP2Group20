@@ -38,6 +38,7 @@
 <spring:message code="quolet.delete" var="msgDelete" />
 <spring:message code="quolet.confirm.delete" var="msgConfirm" />
 
+<jsp:useBean id="now" class="java.util.Date"/>
 
 <%-- Listing grid --%>
 
@@ -46,12 +47,29 @@
 
 	<%-- Attributes --%>
 	
-	<display:column property="ticker" title="${ticker}" sortable="true" />
-	<display:column title="${publicationMoment}" sortable="true">
+	<jstl:choose>
+		<jstl:when
+			test="${((now.time - row.publicationMoment.time)< 2592000000)}">
+			<jstl:set var="colorValue" value="indigo" />
+		</jstl:when>
+		<jstl:when
+			test="${(now.time - row.publicationMoment.time)> (2*2592000000)}">
+			<jstl:set var="colorValue" value="darkSlateGrey" />
+		</jstl:when>
+
+		<jstl:otherwise>
+			<jstl:set var="colorValue" value="PapayaWhip" />
+		</jstl:otherwise>
+	</jstl:choose>
+	
+	<display:column property="ticker" title="${ticker}" sortable="true" style="background-color:${colorValue}"/>
+
+	<display:column title="${publicationMoment}" sortable="true"
+		style="background-color:${colorValue}" >
 		<fmt:formatDate value="${row.publicationMoment}" pattern="${formatDate}"/>
 	</display:column>
 	
-	<display:column title="${finalMode}" sortable="true">
+	<display:column title="${finalMode}" sortable="true" style="background-color:${colorValue}">
 		<jstl:if test="${row.finalMode eq true}">
 		<jstl:out value="${finalModeTrue}"/>
 		</jstl:if>
@@ -61,19 +79,29 @@
 	</display:column>
 	
 	<%-- Display --%>
+	
+	<security:authorize access="hasRole('AUDITOR')">
 		<spring:url var="displayUrl" value="quolet/display.do">
 			<spring:param name="varId" value="${row.id}" />
 		</spring:url>
-		<display:column title="${display}">
+	</security:authorize>
+	
+	<security:authorize access="hasRole('COMPANY')">
+		<spring:url var="displayUrl" value="quolet/company/display.do">
+			<spring:param name="varId" value="${row.id}" />
+		</spring:url>
+	</security:authorize>
+		<display:column title="${display}" style="background-color:${colorValue}">
 			<a href="${displayUrl}"><jstl:out value="${display}" /></a>
 		</display:column>
 		
 	<%-- Edit --%>	
+	<security:authorize access="hasRole('COMPANY')">
 		<spring:url var="editUrl" value="quolet/company/edit.do">
-			<spring:param name="varId" value="${row.id}" />
+			<spring:param name="varId" value="${row.id}"/>
 		</spring:url>
 		
-		<display:column title="${edit}">
+		<display:column title="${edit}" style="background-color:${colorValue}">
 		<jstl:if test="${row.finalMode eq false}">
 			<a href="${editUrl}"><jstl:out value="${edit}" /></a>
 		</jstl:if>
@@ -86,10 +114,11 @@
 	</spring:url>
 	
 	
-	<display:column title="${msgDelete}">
+	<display:column title="${msgDelete}" style="background-color:${colorValue}">
 	<jstl:if test="${row.finalMode eq false}">
 		<a href="${deleteURL}" onclick="return confirm('${msgConfirm}')" ><jstl:out value="${msgDelete}" /></a>
 	</jstl:if>
 	</display:column>
+	</security:authorize>
 	
 </display:table>

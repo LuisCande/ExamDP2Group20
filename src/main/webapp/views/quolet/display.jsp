@@ -32,16 +32,35 @@
 <spring:message code="quolet.return" var="returnMsg" />
 <spring:message code="formatDate" var="formatDate" />
 
+<jsp:useBean id="now" class="java.util.Date"/>
+
 <%-- For the selected floatAcme, display the following information: --%>
 
 
+	<jstl:choose>
+		<jstl:when
+			test="${((now.time - quolet.publicationMoment.time)< 2592000000)}">
+			<jstl:set var="colorValue" value="indigo" />
+		</jstl:when>
+		<jstl:when
+			test="${(now.time - quolet.publicationMoment.time)> (2*2592000000)}">
+			<jstl:set var="colorValue" value="darkSlateGrey" />
+		</jstl:when>
+
+		<jstl:otherwise>
+			<jstl:set var="colorValue" value="PapayaWhip" />
+		</jstl:otherwise>
+	</jstl:choose>
+	
+	<p style="color:${colorValue}; font-weight: bold">
+	<jstl:out value="${publicationMoment}" />:
+	<fmt:formatDate value="${quolet.publicationMoment}" pattern="${formatDate}"/>
+	</p>
+	
 	<jstl:out value="${ticker}" />
 	<jstl:out value="${quolet.ticker}"/>
 	<br />
 	
-	<jstl:out value="${publicationMoment}" />:
-	<fmt:formatDate value="${quolet.publicationMoment}" pattern="${formatDate}"/>
-	<br />
 	
 	<jstl:out value="${body}" />:
 	<jstl:out value="${quolet.body}"/>

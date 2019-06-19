@@ -85,22 +85,14 @@
 			<a href="${quoletListUrl}"><jstl:out value="${listQuolet}" /></a>
 		</display:column>
 	</security:authorize>
-	
 	<%-- Display --%>
-	<security:authorize access="hasRole('AUDITOR')">
-		<spring:url var="displayUrl" value="quolet/display.do">
+		<spring:url var="displayUrl" value="audit/display.do">
 			<spring:param name="varId" value="${row.id}" />
 		</spring:url>
-	</security:authorize>
-	
-	<security:authorize access="hasRole('COMPANY')">
-		<spring:url var="displayUrl" value="quolet/company/display.do">
-			<spring:param name="varId" value="${row.id}" />
-		</spring:url>
-	</security:authorize>
 		<display:column title="${display}">
 			<a href="${displayUrl}"><jstl:out value="${display}" /></a>
 		</display:column>
+	
 	<%-- Edit --%>	
 		<spring:url var="editUrl" value="audit/auditor/edit.do">
 			<spring:param name="varId" value="${row.id}" />
