@@ -37,7 +37,7 @@
 <spring:message code="quolet.display" var="display" />
 <spring:message code="quolet.delete" var="msgDelete" />
 <spring:message code="quolet.confirm.delete" var="msgConfirm" />
-
+<jstl:set var="localeCode" value="${pageContext.response.locale}" />
 <jsp:useBean id="now" class="java.util.Date"/>
 
 <%-- Listing grid --%>
@@ -64,11 +64,20 @@
 	
 	<display:column property="ticker" title="${ticker}" sortable="true" style="background-color:${colorValue}"/>
 
+<jstl:if test="${localeCode == 'en'}">
 	<display:column title="${publicationMoment}" sortable="true"
 		style="background-color:${colorValue}" >
-		<fmt:formatDate value="${row.publicationMoment}" pattern="${formatDate}"/>
+		<fmt:formatDate value="${row.publicationMoment}" pattern="yy/MM/dd HH:mm"/>
 	</display:column>
-	
+</jstl:if>	
+
+<jstl:if test="${localeCode == 'es'}">
+	<display:column title="${publicationMoment}" sortable="true"
+		style="background-color:${colorValue}" >
+		<fmt:formatDate value="${row.publicationMoment}" pattern="dd-MM-yy HH:mm"/>
+	</display:column>
+</jstl:if>	
+
 	<display:column title="${finalMode}" sortable="true" style="background-color:${colorValue}">
 		<jstl:if test="${row.finalMode eq true}">
 		<jstl:out value="${finalModeTrue}"/>

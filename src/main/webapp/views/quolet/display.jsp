@@ -31,11 +31,10 @@
 <spring:message code="quolet.finalMode.true" var="msgTrue" />
 <spring:message code="quolet.return" var="returnMsg" />
 <spring:message code="formatDate" var="formatDate" />
-
+<jstl:set var="localeCode" value="${pageContext.response.locale}" />
 <jsp:useBean id="now" class="java.util.Date"/>
 
 <%-- For the selected floatAcme, display the following information: --%>
-
 
 	<jstl:choose>
 		<jstl:when
@@ -52,10 +51,19 @@
 		</jstl:otherwise>
 	</jstl:choose>
 	
+	<jstl:if test="${localeCode == 'en'}">
 	<p style="color:${colorValue}; font-weight: bold">
 	<jstl:out value="${publicationMoment}" />:
-	<fmt:formatDate value="${quolet.publicationMoment}" pattern="${formatDate}"/>
+	<fmt:formatDate value="${quolet.publicationMoment}" pattern="yy/MM/dd HH:mm"/>
 	</p>
+	</jstl:if>
+	
+	<jstl:if test="${localeCode == 'es'}">
+	<p style="color:${colorValue}; font-weight: bold">
+	<jstl:out value="${publicationMoment}" />:
+	<fmt:formatDate value="${quolet.publicationMoment}" pattern="dd-MM-yy HH:mm"/>
+	</p>
+	</jstl:if>
 	
 	<jstl:out value="${ticker}" />
 	<jstl:out value="${quolet.ticker}"/>
